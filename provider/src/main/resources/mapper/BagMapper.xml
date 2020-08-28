@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkm.provider.dao.BagDao">
+
+    <select id="searchBag" parameterType="String" resultType="com.pkm.service.object.Bag">
+       SELECT a.id AS id,a.name AS name,a.numPkm AS pkmNum,b.numBall AS ballNum FROM
+       (select user.id,user.name,COUNT(pkm_pack.user_id) AS numPkm   from user LEFT JOIN pkm_pack ON pkm_pack.user_id=user.id GROUP BY user.id,user.name) AS a,
+       (select user.id,user.name,sum(ball_pack.num) AS numBall from user LEFT JOIN ball_pack ON ball_pack.user_id=user.id GROUP BY user.id,user.name) AS b
+       WHERE a.id=b.id AND a.name LIKE #{keyword}
+    </select>
+    <select id="getAllBag" resultType="com.pkm.service.object.Bag">
+       SELECT a.id AS id,a.name AS name,a.numPkm AS pkmNum,b.numBall AS ballNum FROM
+       (select user.id,user.name,COUNT(pkm_pack.user_id) AS numPkm   from user LEFT JOIN pkm_pack ON pkm_pack.user_id=user.id GROUP BY user.id,user.name) AS a,
+       (select user.id,user.name,sum(ball_pack.num) AS numBall from user LEFT JOIN ball_pack ON ball_pack.user_id=user.id GROUP BY user.id,user.name) AS b
+       WHERE a.id=b.id
+    </select>
+</mapper>

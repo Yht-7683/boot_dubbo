@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkm.provider.dao.Pkm_packDao">
+
+    <select id="getPkm_packById" parameterType="int" resultType="com.pkm.service.object.Pkm_pack">
+       select * from Pkm_pack where id=#{id}
+    </select>
+    <select id="getAllPkm_pack"
+            resultType="com.pkm.service.object.Pkm_pack">
+       select * from Pkm_pack
+    </select>
+    <select id="searchPkm_pack" resultType="com.pkm.service.object.Pkm_pack" parameterType="String">
+       select * from Pkm_pack where name like #{keyword}
+    </select>
+    <delete id="delPkm_pack" parameterType="int">
+        delete from  Pkm_pack where id=#{id}
+    </delete>
+    <update id="upPkm_pack" parameterType="com.pkm.service.object.Pkm_pack">
+        update Pkm_pack set LV=#{LV}
+       where id=#{id}
+    </update>
+    <insert id="addPkm_pack" parameterType="com.pkm.service.object.Pkm_pack">
+        insert into Pkm_pack(user_id,pokemon_id,meetTime,LV) values(#{user_id},#{pokemon_id},#{meetTime},#{LV})
+    </insert>
+</mapper>

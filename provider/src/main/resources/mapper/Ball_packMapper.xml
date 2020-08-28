@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkm.provider.dao.Ball_packDao">
+
+    <select id="getBall_packById" resultType="com.pkm.service.object.Ball_pack">
+       select * from ball_pack where user_id=#{userid} and ball_id=#{ballid}
+    </select>
+    <select id="getAllBall_pack"
+            resultType="com.pkm.service.object.Ball_pack">
+       select * from ball_pack
+    </select>
+    <select id="searchBall_pack" resultType="com.pkm.service.object.Ball_pack" parameterType="String">
+       select * from ball_pack where user_id like #{keyword}
+    </select>
+    <delete id="delBall_pack" parameterType="int">
+        delete from  ball_pack where id=#{id}
+    </delete>
+    <update id="upBall_pack" parameterType="com.pkm.service.object.Ball_pack">
+        update ball_pack set num=#{num}
+       where user_id=#{userid} AND ball_id=#{ballid}
+    </update>
+    <insert id="addBall_pack" parameterType="com.pkm.service.object.Ball_pack">
+        insert into ball_pack(user_id,ball_id,num) values(#{user_id},#{ball_id},#{num})
+    </insert>
+</mapper>

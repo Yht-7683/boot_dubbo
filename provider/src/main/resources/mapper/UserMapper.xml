@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkm.provider.dao.UserDao">
+
+    <select id="getUserById" parameterType="String" resultType="com.pkm.service.object.User">
+       select * from user where id=#{id}
+    </select>
+    <select id="getUserByName" parameterType="String" resultType="com.pkm.service.object.User">
+       select * from user where name=#{name}
+    </select>
+    <select id="getAllUser"
+            resultType="com.pkm.service.object.User">
+       select * from user
+    </select>
+    <select id="searchUser" resultType="com.pkm.service.object.User" parameterType="String">
+       select * from user where name like #{keyword}
+    </select>
+    <delete id="delUser" parameterType="String">
+        delete from  user where id=#{id}
+    </delete>
+    <update id="upUser" parameterType="com.pkm.service.object.User">
+        update user set name=#{name},photo=#{photo},password=#{password},phone=#{phone},state=#{state},role=#{role},sex=#{sex},money=#{money}
+       where id=#{id}
+    </update>
+    <insert id="addUser" parameterType="com.pkm.service.object.User">
+        insert into user values(#{id},#{name},#{photo},#{password},#{phone},#{state},#{role},#{sex},#{registTime},#{money})
+    </insert>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkm.provider.dao.BallDao">
+
+    <select id="getBallById" parameterType="int" resultType="com.pkm.service.object.Ball">
+       select * from ball where id=#{id}
+    </select>
+    <select id="getAllBall"
+            resultType="com.pkm.service.object.Ball">
+       select * from ball
+    </select>
+    <select id="searchBall" resultType="com.pkm.service.object.Ball" parameterType="String">
+       select * from ball where name like #{keyword}
+    </select>
+    <delete id="delBall" parameterType="int">
+        delete from  ball where id=#{id}
+    </delete>
+    <update id="upBall" parameterType="com.pkm.service.object.Ball">
+        update ball set name=#{name},img=#{img},probability=#{probability},money=#{money}
+       where id=#{id}
+    </update>
+    <insert id="addBall" parameterType="com.pkm.service.object.Ball">
+        insert into ball(name,img,probability,money) values(#{name},#{img},#{probability},#{money})
+    </insert>
+</mapper>

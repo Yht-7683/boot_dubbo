@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkm.provider.dao.PokemonDao">
+
+    <select id="getPokemonById" parameterType="int" resultType="com.pkm.service.object.Pokemon">
+       select * from Pokemon where id=#{id}
+    </select>
+    <select id="getAllPokemon"
+            resultType="com.pkm.service.object.Pokemon">
+       select * from Pokemon
+    </select>
+    <select id="searchPokemon" resultType="com.pkm.service.object.Pokemon" parameterType="String">
+       select * from Pokemon where
+       name like #{keyword}
+       or type like #{keyword}
+    </select>
+    <delete id="delPokemon" parameterType="int">
+        delete from  Pokemon where id=#{id}
+    </delete>
+    <update id="upPokemon" parameterType="com.pkm.service.object.Pokemon">
+        update Pokemon set name=#{name},img=#{img},type=#{type},ability=#{ability},others=#{others}
+       where id=#{id}
+    </update>
+    <insert id="addPokemon" parameterType="com.pkm.service.object.Pokemon">
+        insert into Pokemon values(#{id},#{name},#{img},#{type},#{ability},#{others})
+    </insert>
+    <select id="getPokemonNum" resultType="int">
+       select count(id) from Pokemon
+    </select>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkm.provider.dao.PkmBagDao">
+
+    <select id="getPkmBagById" parameterType="String" resultType="com.pkm.service.object.PkmBag">
+       SELECT pkm_pack.id AS bagid,pokemon.id AS id,pokemon.`name` AS name,pokemon.img AS img,pokemon.type AS type,pokemon.ability AS ability,pokemon.others AS others,pkm_pack.meetTime AS meetTime,pkm_pack.LV AS LV
+       FROM pokemon,pkm_pack
+       WHERE pokemon.id=pkm_pack.pokemon_id AND pkm_pack.user_id=#{id}
+    </select>
+    <select id="searchPkmBag"  resultType="com.pkm.service.object.PkmBag">
+       SELECT pkm_pack.id AS bagid,pokemon.id AS id,pokemon.`name` AS name,pokemon.img AS img,pokemon.type AS type,pokemon.ability AS ability,pokemon.others AS others,pkm_pack.meetTime AS meetTime,pkm_pack.LV AS LV
+       FROM pokemon,pkm_pack
+       WHERE pokemon.id=pkm_pack.pokemon_id AND pkm_pack.user_id=#{id} AND (pokemon.name LIKE #{name} or type like #{name})
+    </select>
+</mapper>
